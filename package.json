@@ -1,0 +1,11 @@
+{
+  "name": "my-planner",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/araujrafa/my-planner.git",
+  "author": "araujrafa <rafael.araujo@grupofolha.com.br>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.5.2"
+  }
+}
