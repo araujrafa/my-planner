@@ -1,6 +1,6 @@
 import React from 'react';
 import { hot } from 'react-hot-loader'
 
-const App = () => <div>Hello sd!</div>
+const App = () => <div>Fala bixo!</div>
 
 export default hot(module)(App);
