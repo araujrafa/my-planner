@@ -1,7 +1,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader'
-import ToDoList from './ToDoList';
+import Books from './components/Books';
 
-const App = () => <div><ToDoList /></div>
+const App = () => <div><Books /></div>
 
 export default hot(module)(App);
