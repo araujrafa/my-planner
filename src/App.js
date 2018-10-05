@@ -1,6 +1,6 @@
 import React from 'react';
 import { hot } from 'react-hot-loader'
-import Books from './components/Books';
+import Books from './components/Books/';
 
 const App = () => <div><Books /></div>
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from "react-redux";
-import * as actions from "../actions";
+import * as actions from "../../actions";
 
 // Component
-import Book from './Book';
+import Book from './item';
 
 class Books extends React.Component {
   constructor() {
@@ -12,10 +12,11 @@ class Books extends React.Component {
     this.onUpdate = this.onUpdate.bind(this);
   }
 
-  onUpdate(e, state) {
+  onUpdate(e, data) {
     if (e.key === 'Enter') {
-      const { updateBook } = this.props;
-      updateBook(state);
+      const { updateData } = this.props;
+      data.ref = 'books';
+      updateData(data);
     }
   }
 
@@ -38,13 +39,14 @@ class Books extends React.Component {
 
   onSubmit(e, data) {
     if (e.key === 'Enter') {
-      const { addBook } = this.props;
-      addBook(data);
+      const { addData } = this.props;
+      data.ref = 'books';
+      addData(data);
     }
   }
 
   componentWillMount() {
-    this.props.fetchBooks();
+    this.props.fetchData('books');
   }
 
   render() {

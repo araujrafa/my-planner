@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import Input from './common/Input'
+import Input from '../common/Input'
 
 class Book extends React.Component {
   state = {

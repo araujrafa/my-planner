@@ -1,47 +1,48 @@
-'use strict';
 
-import { todosRef, booksRef } from '../config/firebase';
-import { FETCH_TODOS, FETCH_BOOKS } from './types';
+import { booksRef } from '../config/firebase';
+import { FETCH_BOOKS } from './types';
 
-export const addToDo = newToDo => async dispatch => {
-  todosRef.push().set(newToDo);
+const getData = data => {
+  const filtered = Object.keys(data)
+    .filter(key => key !== 'id' && key !== 'ref' && typeof data[key] !== 'function')
+    .reduce((obj, key) => {
+      obj[key] = data[key];
+      return obj
+    }, {});
+  
+  return filtered;
 }
 
-export const completeToDo = completeToDoId => async dispatch => {
-  todosRef.child(completeToDoId).remove();
+const getRef = (ref) => {
+  switch (ref) {
+    case 'books':
+      return { ref: booksRef, type: FETCH_BOOKS }
+    default:
+      return {};
+  }
 }
 
-export const fetchToDos = () => async dispatch => {
-  todosRef.on('value', snapshot => {
+export const addData = newData => async dispatch => {
+  let dataRef = getRef(newData.ref).ref;
+  dataRef.push().set(getData(newData));
+}
+
+export const updateData = update => async dispatch => {
+  const dataRef = getRef(newData.ref).ref;
+  dataRef.child(update.id).update(getData(update));
+}
+
+export const removeData = newData => async dispatch => {
+  let dataRef = getRef(newData.ref).ref;
+  dataRef.child(update.id).remove();
+}
+
+export const fetchData = ref => async dispatch => {
+  const opt = getRef(ref);
+
+  opt.ref.on('value', snapshot => {
     dispatch({
-      type: FETCH_TODOS,
-      payload: snapshot.val()
-    })
-  });
-}
-
-export const addBook = newBook => async dispatch => {
-  const { name, initialDate, endDate } = newBook;
-  booksRef.push().set({
-    name,
-    initialDate,
-    endDate
-  });
-}
-
-export const updateBook = book => async dispatch => {
-  const { id, name, initialDate, endDate } = book;
-  booksRef.child(id).set({
-    name,
-    initialDate,
-    endDate
-  });
-}
-
-export const fetchBooks = () => async dispatch => {
-  booksRef.on('value', snapshot => {
-    dispatch({
-      type: FETCH_BOOKS,
+      type: opt.type,
       payload: snapshot.val()
     })
   });
