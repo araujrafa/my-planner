@@ -34,7 +34,7 @@ export const updateData = update => async dispatch => {
 
 export const removeData = newData => async dispatch => {
   let dataRef = getRef(newData.ref).ref;
-  dataRef.child(update.id).remove();
+  dataRef.child(newData.id).remove();
 }
 
 export const fetchData = ref => async dispatch => {

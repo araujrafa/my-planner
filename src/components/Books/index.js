@@ -22,27 +22,41 @@ class Books extends React.Component {
 
   renderBooks() {
     const { books } = this.props;
-    return Object.keys(books).map(prop => {
+    return Object.keys(books).map((prop, i) => {
       return (
-        <div key={prop}>
-          <Book 
-            name={books[prop].name}
-            initialDate={books[prop].initialDate}
-            endDate={books[prop].endDate}
-            id={prop}
-            onSubmit={this.onUpdate}
-          />
+        <div key={prop} className="col-lg-6 col-sm-12" style={{marginBottom: 10}}>
+          <div className="card-header">
+            {i + 1}
+          </div>
+          <div className="card-body">
+            <Book 
+              name={books[prop].name}
+              author={books[prop].author}
+              numberChapters={books[prop].numberChapters}
+              rating={books[prop].rating}
+              initialDate={books[prop].initialDate}
+              endDate={books[prop].endDate}
+              id={prop}
+              onSubmit={this.onUpdate}
+            />
+            <button type="button" className="btn btn-danger" onClick={() => this.onDelete(books[prop], prop)}>Deletar</button>
+          </div>
         </div>
       )
     });
   }
 
+  onDelete(data, id) {
+    const { removeData } = this.props;
+    data.id = id;
+    data.ref = 'books';
+    removeData(data);
+  }
+
   onSubmit(e, data) {
-    if (e.key === 'Enter') {
-      const { addData } = this.props;
-      data.ref = 'books';
-      addData(data);
-    }
+    const { addData } = this.props;
+    data.ref = 'books';
+    addData(data);
   }
 
   componentWillMount() {
@@ -51,15 +65,24 @@ class Books extends React.Component {
 
   render() {
     return (
-      <div>
-        <Book 
-          name=''
-          initialDate=''
-          endDate=''
-          onSubmit={this.onSubmit}
-        />
-        <div>
-          {this.renderBooks()}
+      <div className="container">
+        <div className="row" style={{marginBottom: 10}}>
+          <h3>Organizador de Livros</h3>
+          <Book 
+            name=''
+            author=''
+            numberChapters=''
+            rating=''
+            initialDate=''
+            endDate=''
+            onSubmit={this.onSubmit}
+          />
+        </div>
+        <div className="row" style={{marginBottom: 10}}>
+          <h4>Livros lidos</h4>
+          <div className="row">
+            {this.renderBooks()}
+          </div>
         </div>
       </div>
     );
