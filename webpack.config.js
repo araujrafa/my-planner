@@ -51,6 +51,7 @@ module.exports = {
   plugins: webpackPlugins,
   output: {
     filename: 'js/app.bundle.js',
-    path: path.resolve(__dirname, 'public')
+    path: path.resolve(__dirname, 'public'),
+    publicPath: '/'
   }
 }
