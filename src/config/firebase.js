@@ -2,7 +2,6 @@ import firebase from 'firebase/app'
 
 import 'firebase/database'
 
-
 firebase.initializeApp({
   apiKey: process.env.API_KEY,
   authDomain: process.env.AUTH_DOMAIN,
@@ -15,3 +14,4 @@ firebase.initializeApp({
 const databaseRef = firebase.database().ref();
 export const todosRef = databaseRef.child('todos');
 export const booksRef = databaseRef.child('books');
+export const bodyRef = databaseRef.child('body');

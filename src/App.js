@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { hot } from 'react-hot-loader'
 
 // Components
+import Body from './components/Body';
 import Books from './components/Books/';
 
 const App = () => (
@@ -10,10 +11,12 @@ const App = () => (
     <div>
       <nav>
         <ul>
-          <li><Link to='/books/'>Livros</Link></li>
+          <li><Link to='/body/'>Body</Link></li>
+          <li><Link to='/books/'>Books</Link></li>
         </ul>
       </nav>
     
+      <Route path='/body/' exact component={Body} />
       <Route path='/books/' exact component={Books} />
     </div>
   </Router>

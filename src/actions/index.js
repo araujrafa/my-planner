@@ -1,6 +1,6 @@
 
-import { booksRef } from '../config/firebase';
-import { FETCH_BOOKS } from './types';
+import { booksRef, bodyRef } from '../config/firebase';
+import { FETCH_BOOKS, FETCH_BODY } from './types';
 
 const getData = data => {
   const filtered = Object.keys(data)
@@ -17,6 +17,8 @@ const getRef = (ref) => {
   switch (ref) {
     case 'books':
       return { ref: booksRef, type: FETCH_BOOKS }
+    case 'body':
+      return { ref: bodyRef, type: FETCH_BODY }
     default:
       return {};
   }
