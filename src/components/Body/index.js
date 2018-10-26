@@ -35,6 +35,41 @@ class Body extends React.Component {
     });
   }
 
+  getStatus(imc) {
+    let result = '';
+
+    if (imc < 18.5) {
+      result = 'BAIXO PESO';
+    } else if (imc < 24.9) {
+      result = 'PESO IDEAL';
+    } else if (imc < 29.9) {
+      result = 'SOBREPESO';
+    } else if (imc < 34.9) {
+      result = 'OBESIDADE I';
+    } else if (imc < 39.9) {
+      result = 'OBESIDADE II';
+    } else {
+      result = 'OBESIDADE III'
+    }
+
+    return result;
+  }
+
+  renderInfos() {
+    const body = this.props.body;
+    return Object.keys(body).map(key => {
+      return (
+        <tr key={key}>
+          <td>{body[key].month}</td>
+          <td>{body[key].weigth}</td>
+          <td>{body[key].height}</td>
+          <td>{(body[key].imc).toFixed(1)}</td>
+          <td>{this.getStatus(body[key].imc)}</td>
+        </tr>
+      )
+    });
+  }
+
   render() {
     return (
       <div className="container">
@@ -93,13 +128,7 @@ class Body extends React.Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Outubro / 2018</td>
-                <td>88</td>
-                <td>1.80</td>
-                <td>27.8</td>
-                <td>Sobrepeso</td>
-              </tr>
+              {this.renderInfos()}
             </tbody>
           </table>
         </div>
